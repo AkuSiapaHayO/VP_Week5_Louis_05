@@ -41,18 +41,28 @@ class ViewModelSoal1 : ViewModel() {
     }
 
     fun isGameOver(guess: String): Boolean {
-        return if (_uiState.value.guess == 3) {
-            true
-        } else {
-            if (checkGuess(guess)) {
-                scorePlus()
-                makeRandomNumber()
+        if (checkGuess(guess)) {
+            scorePlus()
+            makeRandomNumber()
+            _uiState.update { data ->
+                data.copy(guess = 0)
+            }
+            return if (_uiState.value.score >= 3) {
                 _uiState.update { data ->
-                    data.copy(guess = 0)
+                    data.copy(score = 3)
                 }
-                false
+                true
             } else {
-                guessPlus()
+                false
+            }
+        } else {
+            guessPlus()
+            return if (_uiState.value.guess >= 3) {
+                _uiState.update { data ->
+                    data.copy(guess = 3)
+                }
+                true
+            } else {
                 false
             }
         }
