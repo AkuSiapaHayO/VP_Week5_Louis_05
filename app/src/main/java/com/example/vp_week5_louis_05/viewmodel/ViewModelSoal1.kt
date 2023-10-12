@@ -43,6 +43,7 @@ class ViewModelSoal1 : ViewModel() {
     fun isGameOver(guess: String): Boolean {
         if (checkGuess(guess)) {
             scorePlus()
+            guessPlus()
             makeRandomNumber()
             _uiState.update { data ->
                 data.copy(guess = 0)
