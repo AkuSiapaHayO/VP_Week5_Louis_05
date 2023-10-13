@@ -126,10 +126,10 @@ fun ViewSoal2(viewModelSoal2: ViewModelSoal2) {
                 )
             )
         }
-        Row (
+        Row(
             Modifier
                 .padding(top = 2.dp, start = 6.dp)
-        ){
+        ) {
             Text(
                 text = if (isSKSError) {
                     "Invalid SKS"
@@ -190,6 +190,9 @@ fun ViewSoal2(viewModelSoal2: ViewModelSoal2) {
                         )
                     ) {
                         viewModelSoal2.addCourse(sks, score, name)
+                        sks = ""
+                        score = ""
+                        name = ""
                     }
                 },
                 colors = ButtonDefaults.buttonColors(
@@ -204,7 +207,7 @@ fun ViewSoal2(viewModelSoal2: ViewModelSoal2) {
                 )
             }
         }
-        if (isNameError){
+        if (isNameError) {
             Text(
                 text = "Please fill your name",
                 Modifier
