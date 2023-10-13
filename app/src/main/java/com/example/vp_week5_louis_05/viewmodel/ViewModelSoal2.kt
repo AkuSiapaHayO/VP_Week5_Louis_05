@@ -9,35 +9,31 @@ class ViewModelSoal2 {
     private val _uiState = MutableStateFlow<List<UIState2>>(emptyList())
     val uiState: StateFlow<List<UIState2>> = _uiState.asStateFlow()
 
-    fun add(sks: String, score:String, nama:String){
-        val newsks = sks.toInt()
-        val newscore = score.toDouble()
-
-        val new = UIState2(newsks, newscore, nama)
-
-        _uiState.value = _uiState.value + new
+    fun addCourse(sks: String, score:String, name:String){
+        val intSKS = sks.toInt()
+        val doubleScore = score.toDouble()
+        val course = UIState2(intSKS, doubleScore, name)
+        _uiState.value = _uiState.value + course
     }
 
-    fun delete(model: UIState2){
-        _uiState.value = _uiState.value - model
+    fun deleteCourse(course: UIState2){
+        _uiState.value = _uiState.value - course
     }
 
     fun totalSKS(): Int {
-        return _uiState.value.sumOf { it.sks }
+        return _uiState.value.sumOf { data ->
+            data.sks
+        }
     }
 
-    fun totalIPK() : Double {
-        val totalSKS = _uiState.value.sumOf { it.sks }
-        val totalNilai = _uiState.value.sumOf { it.sks  * it.score}
-
-        val total = totalNilai/totalSKS
-
-        val totalFormat = if(total !=0.0) {
-            return %2f
-        }else {
-            return 0.00
+    fun totalIPK(): Double {
+        val courses = _uiState.value
+        if (courses.isEmpty()) {
+            return 0.0
         }
-
-        return total
+        val totalSKS = _uiState.value.sumOf { data -> data.sks }
+        val totalScore = _uiState.value.sumOf {data -> data.sks * data.score }
+        val doubleTotalSKS = totalSKS.toDouble()
+        return totalScore / doubleTotalSKS
     }
 }
