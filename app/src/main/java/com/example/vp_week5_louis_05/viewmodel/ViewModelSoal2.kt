@@ -36,4 +36,18 @@ class ViewModelSoal2 {
         val doubleTotalSKS = totalSKS.toDouble()
         return totalScore / doubleTotalSKS
     }
+
+    fun checkSKS(sks: String): Boolean {
+        val intSKS = sks.toIntOrNull()
+        return !(intSKS == null || intSKS <= 0)
+    }
+
+    fun checkScore(score: String): Boolean {
+        val doubleScore = score.toDoubleOrNull()
+        return !(doubleScore == null || doubleScore < 0.0 || doubleScore > 4.0)
+    }
+
+    fun checkName(name: String): Boolean {
+        return name.isNotEmpty()
+    }
 }
