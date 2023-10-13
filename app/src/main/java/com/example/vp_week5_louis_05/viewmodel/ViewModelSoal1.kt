@@ -3,15 +3,15 @@ package com.example.vp_week5_louis_05.viewmodel
 import android.adservices.appsetid.AppSetIdManager.get
 import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
-import com.example.vp_week5_louis_05.model.UIState
+import com.example.vp_week5_louis_05.model.UIState1
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class ViewModelSoal1 : ViewModel() {
-    private val _uiState = MutableStateFlow(UIState())
-    val uiState: StateFlow<UIState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(UIState1())
+    val uiState: StateFlow<UIState1> = _uiState.asStateFlow()
 
     private fun makeRandomNumber(): Int {
         val random = (1..10).random()
@@ -42,9 +42,8 @@ class ViewModelSoal1 : ViewModel() {
 
     fun isGameOver(guess: String): Boolean {
         if (checkGuess(guess)) {
-            scorePlus()
-            guessPlus()
             makeRandomNumber()
+            scorePlus()
             _uiState.update { data ->
                 data.copy(guess = 0)
             }
